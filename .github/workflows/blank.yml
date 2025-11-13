@@ -1,0 +1,101 @@
+TP INTEGRADOR- LOTE FP Y PORCENTAJE CANTIDAD VENDIDA:
+
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    //lote carga de formas de pago:
+
+    char codFP[5];
+    string nomFP[5];
+    float porcentajes[5];
+    int i;
+    for(i=0;i<5;i++):{
+        cout<<"Ingrese el còdigo de forma de pago(EF,MP,TR,TC,CT): ";
+        cin>>codFP[i];
+
+        cout<<"Ingrese el Nombre de la Forma de Pago: ";
+        cin>>nomFP[i];
+
+        cout<<"Ingrese el Porcentaje de descuento o interés."endl;
+        cout<<"Si es un descuento, ingrese un numero negativo. Si es con interès, ingrese un numero positivo."endl;
+        cin>>porcentajes[i];
+    }
+
+    //PUNTO 2: PORCENTAJE DE VENTAS POR CADA MEDIO DE PAGO.
+
+    float porcentajeCantVendidaFP(codFP[5],Cant[],porcentajesCantVendida[5]):
+        acuCant=0;
+        FP=1;
+        while(FP=1):
+
+        acuCant+=Cant[]; //acumula TODAS las cantidades vendidas
+
+        //El usuario ve el monto acumulado hasta el momento del medio de pago. 
+        cout<<"Seleccione el monto acumulado de su medio de pago:";
+        switch
+        case 1:
+            cout<<"Monto acumulado hasta el momento: Efectivo";
+            codFP[i]="EF";
+            acuCantEF+=Cant;
+            cout<<acuCantEf;
+        case 2:
+            cout<<"Monto acumulado hasta el momento: Mercado Pago";
+            codFP[i]="MP";
+            acuCantMP+=Cant;
+            cout<<acuCantMP;
+        case 3:
+            cout<<"Monto acumulado hasta el momento: Transferencia";
+            codFP[i]="TR";
+            acuCantTR+=Cant;
+            cout<<acuCantTR;
+        case 4:
+            cout<<"Monto acumulado hasta el momento: Tarjeta de crèdito";
+            codFP[i]="TC";
+            acuCantTC+=Cant;
+            cout<<acuCantTC;
+        case 5:
+            cout<<"Monto acumulado hasta el momento: Criptomonedas";
+            codFP[i]="CT";
+            acuCantCT+=Cant;
+            cout<<acuCantCT;
+        case 6:
+            cout<<"Salir";
+            FP=2;
+
+            //el usuario elige el porcentaje de cant vendida del medio de pago
+        switch
+        cout<<"Seleccione el porcentaje de cantidad vendida del medio de pago que desea ver";
+        case 1:
+            cout<<"Porcentaje de cantidad vendida: Efectivo";
+            float porcentaje(acuCantEF,Cant);
+            cout<<pce;
+        case 2:
+            cout<<"Porcentaje de cantidad vendida: Mercado Pago";
+            float porcentaje(acuCantMP,Cant);
+            cout<<pce;
+        case 3:
+            cout<<"Porcentaje de cantidad vendida: Transferencia";
+            float porcentaje(acuCantTR,Cant);
+            cout<<pce;
+        case 4:
+            cout<<"Porcentaje de cantidad vendida: Tarjeta de crèdito";
+            float porcentaje(acuCantTC,Cant);
+            cout<<pce;
+        case 5:
+            cout<<"Porcentaje de cantidad vendida: Criptomonedas";
+            float porcentaje(acuCantCM,Cant);
+            cout<<pce;
+        case 6:
+            cout<<"Salir";
+
+        //FUNCION CALCULA PORCENTAJE.
+        float porcentaje(int num1, int num2):
+            pce[5]=(num1*100)/num2;
+            return pce;
+
+
+    return 0;
