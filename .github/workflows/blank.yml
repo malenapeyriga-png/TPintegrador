@@ -138,6 +138,19 @@ int main()
             }
         }
     }
-
+//productos sin ventas
+    void productoSinVentas(bool Vprod[20],int NroCompra,){
+        bool Vprod[20]=false;
+        for(i=0;i<20;i++):{
+            Vprod[20]=false;
+        }
+        while(NroCompra!=0){
+            Vprod[20-1]=True;
+        }
+        for (i=0;i<20,i++):
+        if (Vprod[20]==false):{
+            cout<<"Productos sin ventas;", Vprod[20];
+        }
+    }
 
     return 0;
