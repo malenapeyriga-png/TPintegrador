@@ -32,38 +32,28 @@ using namespace std;
 
         acuCant+=Cant[]; //acumula TODAS las cantidades vendidas
 
-        //El usuario ve el monto acumulado hasta el momento del medio de pago. 
-        cout<<"Seleccione el monto acumulado de su medio de pago:";
-        switch
+        switch(nomFP){
         case 1:
-            cout<<"Monto acumulado hasta el momento: Efectivo";
             codFP[i]="EF";
             acuCantEF+=Cant;
-            cout<<acuCantEf;
         case 2:
-            cout<<"Monto acumulado hasta el momento: Mercado Pago";
             codFP[i]="MP";
             acuCantMP+=Cant;
-            cout<<acuCantMP;
         case 3:
-            cout<<"Monto acumulado hasta el momento: Transferencia";
             codFP[i]="TR";
             acuCantTR+=Cant;
-            cout<<acuCantTR;
         case 4:
-            cout<<"Monto acumulado hasta el momento: Tarjeta de crèdito";
             codFP[i]="TC";
             acuCantTC+=Cant;
-            cout<<acuCantTC;
         case 5:
-            cout<<"Monto acumulado hasta el momento: Criptomonedas";
             codFP[i]="CT";
             acuCantCT+=Cant;
-            cout<<acuCantCT;
         case 6:
             cout<<"Salir";
             B=2;
-
+		}
+		//AGREGO
+		break
             //el usuario elige el porcentaje de cant vendida del medio de pago
         switch
         cout<<"Seleccione el porcentaje de cantidad vendida del medio de pago que desea ver";
