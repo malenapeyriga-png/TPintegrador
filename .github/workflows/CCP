@@ -1,1 +1,11 @@
+Desarrollo de funciones y còdigo: 
+#include<iostream>
+#include<cstdlib>
+#include<cstdio>
+#include<ctime>
+
+using namespace std;
+#include "funciones.h"
+
+
 
