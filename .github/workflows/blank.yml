@@ -155,3 +155,64 @@ int main()
     
 
     return 0;
+-----------------
+5- 5. Top 10 clientes + sorteo de cupones:
+		int codCliente[50]
+        NroCompra[]:    
+        int max[50]: {};    
+
+	for (int i = 0; i < nroCompra; i++) {
+		if (codCliente[i] == nroCompra[i]) {
+			//un vector contador, si el codigo de cliente y el de compra coinciden,
+			//se le suma uno al contador, es la cantidad de nros de compras que coinciden con el
+			//codigo de cliente, o sea, la cant de compras que hizo cada cliente.
+			int conNroCompra[50];
+			conNroCompra[i]+=1;
+		}
+		//funcion ordenar vector de menor a mayor
+		void ordenarVector(int v[], int tam ) {
+			int i,j, posmin, aux;
+			for(i=0; i<tam-1; i++) {
+				posmin=i;
+				for(j=i+1; j<tam; j++) {
+					if(v[j]<v[posmin]) posmin=j;
+				}
+				aux=v[i];
+				v[i]=v[posmin];
+				v[posmin]=aux;
+			}
+	//llamo a la funcion para ordenar de menor a mayor
+	
+	ordenarVector(cantNroCompra, 50);
+	
+		//agarro los ultimos 10 y los pongo en un vector maximo:
+	for (int i=0;i<10; i++): {
+    MAX[i]=cantNroCompra[40 + i];
+    }
+	
+	for(i=0;i<10,i++):{
+	    cout<<"Los 10 clientes con mas compras realizadas: ";
+	    cout<<codCliente[i], MAX[i];
+		}
+	//cargarAleatorio
+	void cargarAleatorio(int v[], int tam, int limite){
+    int i;
+    for( i=0; i<tam; i++ ){
+        v[i]=(rand()%limite)+1;
+    }
+     void mostrarVector(int v[], int tam){
+    int i;
+    for(i=0;i<tam;i++){
+        cout<<v[i]<<"\t";
+    }
+    //Llamo a la funcion para cargar cargarAleatorio
+    
+    void cargarAleatorio(codCliente[],int 3, int 50);
+    cout<<"l@S 3 GANADOR@S DEL SORTEO DE CUPONES DE DESCUENTO SON: "
+    //llamo a la funcion mostrarVector para que imprima los 3 num aleatorios
+    void mostrarVector(int codCliente[], int 3, int 50);
+
+
+
+
+}
