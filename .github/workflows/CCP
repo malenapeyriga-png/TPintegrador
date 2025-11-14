@@ -28,7 +28,7 @@ using namespace std;
             pce[5]=(num1*100)/num2;
             return pce;
 
-      while(FP=1):
+      while(B=1):
 
         acuCant+=Cant[]; //acumula TODAS las cantidades vendidas
 
@@ -62,7 +62,7 @@ using namespace std;
             cout<<acuCantCT;
         case 6:
             cout<<"Salir";
-            FP=2;
+            B=2;
 
             //el usuario elige el porcentaje de cant vendida del medio de pago
         switch
