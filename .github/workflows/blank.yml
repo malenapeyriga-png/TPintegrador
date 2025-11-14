@@ -98,7 +98,7 @@ int main()
             return pce;
 --------------------------------------------------
 
-//ventas por marca y fp
+//3. ventas por marca y fp
     float acuEF[]={};
     float acuMP[]={};
     float acuTR[]={};
@@ -138,7 +138,7 @@ int main()
             }
         }
     }
-//productos sin ventas
+//4.productos sin ventas
     void productoSinVentas(bool Vprod[20],int NroCompra,){
         bool Vprod[20]=false;
         for(i=0;i<20;i++):{
@@ -152,5 +152,6 @@ int main()
             cout<<"Productos sin ventas;", Vprod[20];
         }
     }
+    
 
     return 0;
