@@ -1,1 +1,161 @@
+//ACA PEGO TODO EL CODIGO QUE HAGO DSP LO ACOMODO EN .H Y CCP
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+//STRUCTS
+struct MARCAS {
+    int codMarca;
+    string nombre;
+};
+struct PRODUCTOS {
+    int codProd;
+    string nombreProd;
+    float preVenta;
+    float preCompra;
+    int stock;
+    int codMarca;
+};
+struct FORMAPAGO{
+    string codPago;
+    string nombreFP;
+    int porcentaje;
+};
+//VALIDACIONES
+
+//validarCero 
+int validarCero(int valor){
+    int i;
+    while (valor==0){
+        cout<<"El valor ingresado no es válido, intentelo nuevamente"<< endl;
+        cin>>valor;
+    }
+    return valor;
+}
+//validaCodMarca
+int validaCodMarca(int valor){
+        while (valor<1 || valor>10){
+        cout<<"El valor ingresado no es válido, intentelo nuevamente"<< endl;
+        cin>>valor;
+    }
+    return valor;
+}
+//validaString
+string validaString(string valor){
+    cin.ignore();
+    
+    while (valor==""){
+        cout<<"El valor ingresado no es válido, intentelo nuevamente"<< endl;
+        getline(cin,valor);
+    }
+    return valor;
+}
+//FUNCIONES CARGAR LOTES
+//LOTE MARCAS
+void cargarLoteMarcas(MARCAS Marcas[], int tam) {
+    int i;
+    for (i = 0; i < tam; i++) {
+        tam=10;
+        cout << "Ingrese el cÃ³digo de la marca: ";
+        cin >> Marcas[i].codMarca;
+        Marcas[i].codMarca = validarCero(Marcas[i].codMarca);
+        Marcas[i].codMarca =validaCodMarca(Marcas[i].codMarca);
+        cout << "Ingrese el nombre de la marca: ";
+        cin.ignore();
+        getline(cin, Marcas[i].nombre);
+        Marcas[i].nombre = validaString(Marcas[i].nombre);
+    }
+}    
+void mostrarLoteMarcas(MARCAS Marcas[], int tam){
+    cout<< "Datos de las marcas" << endl<<endl;
+    for(int i = 0; i < tam; i++){
+        tam=10;
+        cout<<Marcas[i].codMarca << " ---- ";
+        cout<<Marcas[i].nombre<< endl<<endl;
+    }
+}
+//LOTE PRODUCTOS
+void cargarLoteProd(PRODUCTOS vProd[], int tam) {
+    int i;
+    for (i = 0; i < tam; i++) {
+        tam=20;
+        cout << "Ingrese el cÃ³digo del producto: ";
+        cin >> vProd[i].codProd;
+        cin.ignore(); 
+        cout << "Ingrese el nombre del producto: ";
+        getline(cin, vProd[i].nombreProd);
+        cout << "Ingrese el precio de venta del producto: ";
+        cin >> vProd[i].preVenta;
+        cout << "Ingrese el precio de compra del producto: ";
+        cin >> vProd[i].preCompra;
+        cout << "Ingrese el stock del producto: ";
+        cin >> vProd[i].stock;
+        cout << "Ingrese el codigo de marca: ";
+        cin >> vProd[i].codMarca;
+        
+    }
+}
+//mostrar lote de productos
+void mostrarLoteProd(PRODUCTOS vProd[], int tam){
+    cout<< "Datos de los productos" << endl<<endl;
+    for(int i = 0; i < tam; i++){
+        tam=20;
+        cout<<vProd[i].codProd << " ---- ";
+        cout<<vProd[i].nombreProd<< endl<<endl;
+        cout<<vProd[i].preVenta<< endl<<endl;
+        cout<<vProd[i].preCompra<< endl<<endl;
+        cout<<vProd[i].stock<< endl<<endl;
+        cout<<vProd[i].codMarca<< endl<<endl;
+    }
+}
+//LOTE FORMA DE PAGO
+void cargarLoteFP(FORMAPAGO vFormaPago[], int tam) {
+    int i;
+    for (i = 0; i < tam; i++) {
+        tam=5;
+        cout << "Ingrese el cÃ³digo de la forma de pago: ";
+        cin >> vFormaPago[i].codPago;
+        cin.ignore(); 
+        cout << "Ingrese el nombre de la forma de pago ";
+        getline(cin, vFormaPago[i].nombreFP);
+        cout << "Ingrese el porcentaje de descuento (nÃºmero negativo) o interÃ©s (nÃºmero positiv;o) ";
+        cin >> vFormaPago[i].porcentaje;
+        }
+    }
+    //mostrar Lote FORMA DE PAGO
+void mostrarLoteFP(FORMAPAGO vFormaPago[], int tam){
+       cout<< "Datos de las formas de pago: " << endl<<endl;
+    for(int i = 0; i < tam; i++){
+        tam=5;
+        cout<<vFormaPago[i].codPago << " ---- ";
+        cout<<vFormaPago[i].nombreFP<< endl<<endl;
+        cout<<vFormaPago[i].porcentaje<< endl<<endl;
+        }
+    }
+
+
+
+
+//LLAMO FUNCIONES DE CARGA DE LOTES EN MAIN y vectores
+int main() {
+    //marcas
+    MARCAS Marcas[10]; 
+
+    cargarLoteMarcas(vMarcas, 10);
+    
+    mostrarLoteMarcas(vMarcas, 10);
+    
+    //PRODUCTOS
+     PRODUCTOS vProd[20]; 
+    cargarLoteProd(vProd, 20);
+    mostrarLoteProd(vProd, 20);
+    
+  //FORMA DE PAGO
+  FORMAPAGO vFormaPago[5];
+  cargarLoteFP(vFormaPago, 5);
+    mostrarLoteFP(vFormaPago, 5);
+    return 0;
+}
 
