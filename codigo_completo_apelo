@@ -174,7 +174,7 @@ int main() {
     
     //PRODUCTOS
     PRODUCTOS vProd[20]; 
-    cargarLoteProd(vProd, 20, Marcas, 20);
+    cargarLoteProd(vProd, 20, Marcas, 10);
     
   //FORMA DE PAGO
   FORMAPAGO vFormaPago[5];
