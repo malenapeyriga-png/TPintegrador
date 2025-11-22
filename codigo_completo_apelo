@@ -52,13 +52,26 @@ string validaString(string valor){
     }
     return valor;
 }
+//validaCodMarcaIngresado
+int validaCodMarcaIngresado(int cod, MARCAS Marcas[], int tamProd, int tamMarcas) {
+int i = 0;  
+while (true){
+for (i = 0; i<tamMarcas; i++) {
+    if (cod==Marcas[i].codMarca) {
+        return cod; 
+    }
+}
+cout << "Código de marca no encontrado en el lote de marcas. Ingreselo nuevamente: ";
+cin >> cod;
+    }
+}
 //FUNCIONES CARGAR LOTES
 //LOTE MARCAS
-void cargarLoteMarcas(MARCAS Marcas[], int tam) {
+void cargarLoteMarcas(MARCAS Marcas[], int tamMarcas) {
     int i;
-    for (i = 0; i < tam; i++) {
-        tam=10;
-        cout << "Ingrese el cÃ³digo de la marca: ";
+    for (i = 0; i < tamMarcas; i++) {
+        tamMarcas=10;
+        cout << "Ingrese el código de la marca: ";
         cin >> Marcas[i].codMarca;
         Marcas[i].codMarca = validarCero(Marcas[i].codMarca);
         Marcas[i].codMarca =validaCodMarca(Marcas[i].codMarca);
@@ -68,39 +81,51 @@ void cargarLoteMarcas(MARCAS Marcas[], int tam) {
         Marcas[i].nombre = validaString(Marcas[i].nombre);
     }
 }    
-void mostrarLoteMarcas(MARCAS Marcas[], int tam){
+void mostrarLoteMarcas(MARCAS Marcas[], int tamMarcas){
     cout<< "Datos de las marcas" << endl<<endl;
-    for(int i = 0; i < tam; i++){
-        tam=10;
+    for(int i = 0; i < tamMarcas; i++){
+        tamMarcas=10;
         cout<<Marcas[i].codMarca << " ---- ";
         cout<<Marcas[i].nombre<< endl<<endl;
     }
 }
+
 //LOTE PRODUCTOS
-void cargarLoteProd(PRODUCTOS vProd[], int tam) {
+void cargarLoteProd(PRODUCTOS vProd[], int tamProd, MARCAS Marcas[], int tamMarcas) {
     int i;
-    for (i = 0; i < tam; i++) {
-        tam=20;
-        cout << "Ingrese el cÃ³digo del producto: ";
+    for (i = 0; i < tamProd; i++) {
+        tamProd=20;
+        cout << "Ingrese el código del producto: ";
         cin >> vProd[i].codProd;
+        vProd[i].codProd= validarCero(vProd[i].codProd);
         cin.ignore(); 
         cout << "Ingrese el nombre del producto: ";
+        cin.ignore();
         getline(cin, vProd[i].nombreProd);
+        vProd[i].nombreProd = validaString(vProd[i].nombreProd);
         cout << "Ingrese el precio de venta del producto: ";
         cin >> vProd[i].preVenta;
+        vProd[i].preVenta= validarCero(vProd[i].preVenta);
+        cin.ignore(); 
         cout << "Ingrese el precio de compra del producto: ";
         cin >> vProd[i].preCompra;
+        vProd[i].preCompra= validarCero(vProd[i].preCompra);
+        cin.ignore(); 
         cout << "Ingrese el stock del producto: ";
         cin >> vProd[i].stock;
+        vProd[i].stock= validarCero(vProd[i].stock);
+        cin.ignore(); 
         cout << "Ingrese el codigo de marca: ";
         cin >> vProd[i].codMarca;
-        
+        vProd[i].codMarca= validarCero(vProd[i].codMarca);
+        vProd[i].codMarca= validaCodMarcaIngresado(vProd[i].codMarca, Marcas, tamProd, tamMarcas);
+        cin.ignore(); 
     }
 }
 //mostrar lote de productos
-void mostrarLoteProd(PRODUCTOS vProd[], int tam){
+void mostrarLoteProd(PRODUCTOS vProd[], int tamProd){
     cout<< "Datos de los productos" << endl<<endl;
-    for(int i = 0; i < tam; i++){
+    for(int i = 0; i < tamProd; i++){
         tam=20;
         cout<<vProd[i].codProd << " ---- ";
         cout<<vProd[i].nombreProd<< endl<<endl;
@@ -148,9 +173,8 @@ int main() {
     mostrarLoteMarcas(vMarcas, 10);
     
     //PRODUCTOS
-     PRODUCTOS vProd[20]; 
-    cargarLoteProd(vProd, 20);
-    mostrarLoteProd(vProd, 20);
+    PRODUCTOS vProd[20]; 
+    cargarLoteProd(vProd, 20, Marcas, 20);
     
   //FORMA DE PAGO
   FORMAPAGO vFormaPago[5];
