@@ -65,6 +65,33 @@ cout << "Código de marca no encontrado en el lote de marcas. Ingreselo nuevamen
 cin >> cod;
     }
 }
+//repetidosFP
+string repetidosFP(string FP, FORMAPAGO vFormaPago[], int tamFP){
+    while(true){
+
+        for(int i = 0; i < tamFP; i++){
+            if (FP == vFormaPago[i].codPago){
+                cout << "Código de forma de pago ya guardado. Ingreselo nuevamente: ";
+                cin >> FP;
+                i = -1; // es importante para reiniciar el for
+            }
+        }
+        //si no se repitió ningun codFP:
+        return FP;
+    }
+}
+//validarDistintosFP
+string validarDistintosFP(string FP){
+    while(true){
+        if (FP=="EF" || FP == "MP"|| FP=="TR"||FP=="TC"||FP=="CT"){
+            return FP;
+        }
+        else{
+            cout<<"Código de forma de pago inválido, ingreselo nuevamente: ";
+            cin>>FP;
+            }
+        }
+}
 //FUNCIONES CARGAR LOTES
 //LOTE MARCAS
 void cargarLoteMarcas(MARCAS Marcas[], int tamMarcas) {
@@ -136,16 +163,17 @@ void mostrarLoteProd(PRODUCTOS vProd[], int tamProd){
     }
 }
 //LOTE FORMA DE PAGO
-void cargarLoteFP(FORMAPAGO vFormaPago[], int tam) {
+void cargarLoteFP(FORMAPAGO vFormaPago[], int tamFP) {
     int i;
-    for (i = 0; i < tam; i++) {
-        tam=5;
-        cout << "Ingrese el cÃ³digo de la forma de pago: ";
+    for (i = 0; i < tamFP; i++) {
+        cout << "Ingrese el código de la forma de pago (EF,MP,TR,TC,CT): ";
         cin >> vFormaPago[i].codPago;
+        vFormaPago[i].codPago = repetidosFP(vFormaPago[i].codPago, vFormaPago, i);
+        vFormaPago[i].codPago = validarDistintosFP(vFormaPago[i].codPago);
         cin.ignore(); 
         cout << "Ingrese el nombre de la forma de pago ";
         getline(cin, vFormaPago[i].nombreFP);
-        cout << "Ingrese el porcentaje de descuento (nÃºmero negativo) o interÃ©s (nÃºmero positiv;o) ";
+        cout << "Ingrese el porcentaje de descuento (número negativo) o interés (número positivo) ";
         cin >> vFormaPago[i].porcentaje;
         }
     }
@@ -153,7 +181,7 @@ void cargarLoteFP(FORMAPAGO vFormaPago[], int tam) {
 void mostrarLoteFP(FORMAPAGO vFormaPago[], int tam){
        cout<< "Datos de las formas de pago: " << endl<<endl;
     for(int i = 0; i < tam; i++){
-        tam=5;
+        tamFP=5;
         cout<<vFormaPago[i].codPago << " ---- ";
         cout<<vFormaPago[i].nombreFP<< endl<<endl;
         cout<<vFormaPago[i].porcentaje<< endl<<endl;
