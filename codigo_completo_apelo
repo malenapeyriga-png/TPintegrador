@@ -10,6 +10,7 @@ struct MARCAS {
     int codMarca;
     string nombre;
 };
+MARCAS Marcas[10];
 struct PRODUCTOS {
     int codProd;
     string nombreProd;
@@ -18,11 +19,13 @@ struct PRODUCTOS {
     int stock;
     int codMarca;
 };
+PRODUCTOS vProd[20];
 struct FORMAPAGO{
     string codPago;
     string nombreFP;
     int porcentaje;
 };
+FORMAPAGO vFormaPago[5];
 //VALIDACIONES
 
 //validarCero 
@@ -121,7 +124,74 @@ bool validaCargas(MARCAS Marcas[], int tamMarcas, PRODUCTOS vProd[], int tamProd
 
     return true;
 }
+//FUNCIONES PUNTO 1: buscarProd y mostrarRecaudacion
+//buscarProd
+int buscarProd(PRODUCTOS vProd[], int tamProd, int codProd) {
+    for (int i = 0; i < tamProd; i++) {
+        if (vProd[i].codProd == codProd) {
+            return i;   // i quiere decir que el codProd que el usuario ingresa SÍ ESTA cargado adentro de .codProd
+        }
+    }
+    return -1; // No está
+}
 
+
+    // MOSTRAR RECAUDACION
+void mostrarRecaudacion(PRODUCTOS vProd[], int tamProd,
+                        float recaudacion[], int cantVendida[], float remanente[]) 
+//los vectores de recaudacion y remanente tienen tamaño 20 xq acumulan la recaudacion y el remanente por cada producto. 
+{
+    cout <<"Recaudación por producto";
+
+    for (int i = 0; i < tamProd; i++) {
+
+        cout << "Producto: " << vProd[i].nombreProd
+             << "Código: " << vProd[i].codProd
+             << "Recaudación total: $" << recaudacion[i]
+             << "Cantidad vendida: " << cantVendida[i]
+             << "Stock remanente: " << remanente[i];
+    }
+}
+//se pone & antes de solamente las variables ingresadas, NO de vectores, para que los valores se pasen por referencia 
+void ingresoVentas(int &nroCompra, int &codProd, string &FP, int &cant,
+                   int &codCliente, int &dia,
+                   PRODUCTOS vProd[], int tamProd,
+                   float recaudacion[], int cantVendida[],
+                   float remanente[]) 
+{
+    while (true) {
+        cout << "Ingrese el número de compra (0 para salir): ";
+        cin >> nroCompra;
+        if (nroCompra == 0) break;
+
+        cout << "Ingrese el código del producto: ";
+        cin >> codProd;
+
+        int indiceProd = buscarProd(vProd, tamProd, codProd);
+
+        if (indiceProd == -1) {
+            cout << "Producto ino encontrado. Intente nuevamente.";
+            continue;
+        }
+
+        cout << "Ingrese la forma de pago: ";
+        cin >> FP;
+
+        cout << "Ingrese la cantidad vendida: ";
+        cin >> cant;
+
+        // Acumular
+        cantVendida[indiceProd] += cant;
+        recaudacion[indiceProd] += cant * vProd[indiceProd].preVenta;
+        remanente[indiceProd] = vProd[indiceProd].stock - cantVendida[indiceProd];
+
+        cout << "Ingrese el código de cliente: ";
+        cin >> codCliente;
+
+        cout << "Ingrese el día (1-30): ";
+        cin >> dia;
+    }
+}
 //FUNCIONES CARGAR LOTES
 //LOTE MARCAS
 void cargarLoteMarcas(MARCAS Marcas[], int tamMarcas) {
@@ -283,10 +353,21 @@ void ingresoVentas(int &nroCompra, int &codProd, string &FP, int &cant, int &cod
 
         cout << "Ingrese el código del producto: ";
         cin >> codProd;
+        int indiceProd = buscarProd(vProd, tamProd, codProd);
+        if (indiceProd == -1) {
+            cout << "Producto no encontrado. Intente nuevamente.";
+            continue;
+        }
+
         cout << "Ingrese la forma de pago: ";
         cin >> FP;
         cout << "Ingrese la cantidad vendida: ";
         cin >> cant;
+        // Acumular
+        cantVendida[indiceProd] += cant;
+        recaudacion[indiceProd] += cant * vProd[indiceProd].preVenta;
+        remanente[indiceProd] = vProd[indiceProd].stock - cantVendida[indiceProd];
+
         cout << "Ingrese el código de cliente: ";
         cin >> codCliente;
         cout << "Ingrese el día de la venta (1 a 30): ";
@@ -297,6 +378,10 @@ void ingresoVentas(int &nroCompra, int &codProd, string &FP, int &cant, int &cod
 
 //LLAMO FUNCIONES DE CARGA DE LOTES EN MAIN y vectores
 int main() {
+     int tamMarcas = 10;
+    int tamProd = 20;
+    int tamFP = 5;
+
     //marcas
     MARCAS Marcas[10]; 
     cargarLoteMarcas(vMarcas, 10);
@@ -318,9 +403,15 @@ int main() {
 //validaCargas e ingresoVentas, se llaman las dos juntas!!
 // if validaCargas es true, entonces ejecute la funcion de ingresoVentas.
     if (validaCargas(Marcas, tamMarcas, vProd, tamProd, vFormaPago, tamFP)) {
-        ingresoVentas(nroCompra, codProd, FP, cant, codCliente, dia);
+        ingresoVentas((nroCompra, codProd, FP, cant, codCliente, dia,
+                      vProd, tamProd, recaudacion, cantVendida, remanente););
     } else {
         cout << "Primero cargue todas las marcas, productos y formas de pago." << endl;
     }
 }
 
+//PUNTO 1 RECAUDACION
+float recaudacion[20] = {0};
+    float remanente[20] = {0};
+    int cantVendida[20] = {0};
+ mostrarRecaudacion(vProd, tamProd, recaudacion, cantVendida, remanente);
