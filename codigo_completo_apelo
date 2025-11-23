@@ -187,7 +187,63 @@ void mostrarLoteFP(FORMAPAGO vFormaPago[], int tam){
         cout<<vFormaPago[i].porcentaje<< endl<<endl;
         }
     }
+//MOSTRAR REPORTES
 
+int mostrarReportes() {
+    cout << "Mostrar reportes: " << endl;
+    cout << "1. Recaudación por producto." << endl;
+    cout << "2. Porcentaje de ventas por forma de pago." << endl;
+    cout << "3. Ventas por marca y forma de pago." << endl;
+    cout << "4. Productos sin ventas." << endl;
+    cout << "5. TOP 10 clientes + sorteo de cupones." << endl;
+    cout << "6. Volver al menú principal." << endl;
+    cout << "Ingrese una opción: ";
+
+    int opcion;
+    cin >> opcion;
+
+    return opcion;
+}
+void ejecutarReporte(int opcion) {
+
+    switch(opcion) {
+
+        case 1:
+            cout << "Recaudación por producto." << endl;
+            // FUNCION DE Recaudación por producto
+            break;
+        case 2:
+            cout << "Porcentaje de ventas por forma de pago." << endl;
+            // FUNCION Porcentaje de ventas por forma de pago.
+            break;
+        case 3:
+            cout << "Ventas por marca y forma de pago." << endl;
+            // FUNCION "Ventas por marca y forma de pago."
+            break;
+        case 4:
+            cout << "Productos sin ventas." << endl;
+            // FUNCION Productos sin ventas." 
+            break;
+        case 5:
+            cout << "TOP 10 clientes + sorteo de cupones." << endl;
+            // FUNCION "TOP 10 clientes + sorteo de cupones.
+            break;
+        case 6:
+            cout << "Salir" << endl;
+            break;
+    }
+}
+void IniciarMenu() {
+    bool salir = false;
+    int opcion;
+
+    while (!salir) {
+      opcion = mostrarReportes();
+      ejecutarReporte(opcion);
+        if (opcion == 6)
+            salir = true;
+    }
+}
 
 
 
@@ -208,6 +264,9 @@ int main() {
   FORMAPAGO vFormaPago[5];
   cargarLoteFP(vFormaPago, 5);
     mostrarLoteFP(vFormaPago, 5);
+
+//MOSTRAR REPORTE 
+  IniciarMenu();
     return 0;
 }
 
