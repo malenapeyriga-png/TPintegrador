@@ -92,6 +92,36 @@ string validarDistintosFP(string FP){
             }
         }
 }
+//VALIDA CARGAS, VALIDA QUE SE HAYAN INGRESADO DATOS EN CADA VECTOR, VA DE LA MANO CON ingresoVentas. 
+O sea se llama con un IF JUNTO A ingresoVentas
+bool validaCargas(MARCAS Marcas[], int tamMarcas, PRODUCTOS vProd[], int tamProd, FORMAPAGO vFormaPago[], int tamFP) {
+    // Validar marcas
+    for (int i = 0; i < tamMarcas; i++) {
+        if (Marcas[i].codMarca == 0) {
+            cout << "Las marcas no fueron cargadas." << endl;
+            return false;
+        }
+    }
+
+    // Validar productos
+    for (int i = 0; i < tamProd; i++) {
+        if (vProd[i].codProd == 0) {
+            cout << "Los productos no fueron cargados." << endl;
+            return false;
+        }
+    }
+
+    // Validar formas de pago
+    for (int i = 0; i < tamFP; i++) {
+        if (vFormaPago[i].codPago == "") {
+            cout << "Las formas de pago no fueron cargadas." << endl;
+            return false;
+        }
+    }
+
+    return true;
+}
+
 //FUNCIONES CARGAR LOTES
 //LOTE MARCAS
 void cargarLoteMarcas(MARCAS Marcas[], int tamMarcas) {
@@ -244,16 +274,32 @@ void IniciarMenu() {
             salir = true;
     }
 }
+//ingresoVentas
+void ingresoVentas(int &nroCompra, int &codProd, string &FP, int &cant, int &codCliente, int &dia) {
+    while (true) {
+        cout << "Ingrese el número de compra (0 para salir): ";
+        cin >> nroCompra;
+        if (nroCompra == 0) break;
 
+        cout << "Ingrese el código del producto: ";
+        cin >> codProd;
+        cout << "Ingrese la forma de pago: ";
+        cin >> FP;
+        cout << "Ingrese la cantidad vendida: ";
+        cin >> cant;
+        cout << "Ingrese el código de cliente: ";
+        cin >> codCliente;
+        cout << "Ingrese el día de la venta (1 a 30): ";
+        cin >> dia;
+    }
+}
 
 
 //LLAMO FUNCIONES DE CARGA DE LOTES EN MAIN y vectores
 int main() {
     //marcas
     MARCAS Marcas[10]; 
-
     cargarLoteMarcas(vMarcas, 10);
-    
     mostrarLoteMarcas(vMarcas, 10);
     
     //PRODUCTOS
@@ -268,5 +314,13 @@ int main() {
 //MOSTRAR REPORTE 
   IniciarMenu();
     return 0;
+
+//validaCargas e ingresoVentas, se llaman las dos juntas!!
+// if validaCargas es true, entonces ejecute la funcion de ingresoVentas.
+    if (validaCargas(Marcas, tamMarcas, vProd, tamProd, vFormaPago, tamFP)) {
+        ingresoVentas(nroCompra, codProd, FP, cant, codCliente, dia);
+    } else {
+        cout << "Primero cargue todas las marcas, productos y formas de pago." << endl;
+    }
 }
 
