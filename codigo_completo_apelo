@@ -125,7 +125,7 @@ bool validaCargas(MARCAS Marcas[], int tamMarcas, PRODUCTOS vProd[], int tamProd
 
     return true;
 }
-//FUNCIONES PUNTO 1: buscarProd y mostrarRecaudacion
+//FUNCIONES PUNTO 1: buscarProd, burbuja y mostrarRecaudacion
 //buscarProd
 int buscarProd(PRODUCTOS vProd[], int tamProd, int codProd) {
     for (int i = 0; i < tamProd; i++) {
@@ -136,7 +136,28 @@ int buscarProd(PRODUCTOS vProd[], int tamProd, int codProd) {
     return -1; // No está
 }
 
+void burbuja(PRODUCTOS vProd[], int cantVendida[], int tamProd) {
+    PRODUCTOS auxProd;   // Variable auxiliar para intercambiar productos
+    int auxCantVendida;  // Variable auxiliar para intercambiar cantidades vendidas
 
+    // Burbuja
+    for (int i = 0; i < tamProd - 1; i++) {
+        for (int j = 0; j < tamProd - i - 1; j++) {
+            // Si la cantidad vendida del producto j es menor que la del producto j+1, los intercambiamos
+            if (cantVendida[j] < cantVendida[j + 1]) {
+                // Intercambiamos las cantidades vendidas
+                auxCantVendida = cantVendida[j];
+                cantVendida[j] = cantVendida[j + 1];
+                cantVendida[j + 1] = auxCantVendida;
+
+                // Intercambiamos los productos
+                auxProd = vProd[j];
+                vProd[j] = vProd[j + 1];
+                vProd[j + 1] = auxProd;
+            }
+        }
+    }
+}
     // MOSTRAR RECAUDACION
 void mostrarRecaudacion(PRODUCTOS vProd[], int tamProd,
                         float recaudacion[], int cantVendida[], float remanente[]) 
@@ -475,6 +496,8 @@ int main() {
 float recaudacion[20] = {0};
     float remanente[20] = {0};
     int cantVendida[20] = {0};
+//agrego burbuja
+     burbuja(vProd, cantVendida, 5);
  mostrarRecaudacion(vProd, tamProd, recaudacion, cantVendida, remanente);
 
 //PUNTO 5 TOP 10 MAXIMO Y SORTEO:
