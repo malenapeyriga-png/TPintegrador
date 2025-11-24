@@ -2,7 +2,8 @@
 
 #include <iostream>
 #include <string>
-
+#include <cstdlib>  // Para rand() y srand()
+#include <ctime>    // Para time()
 using namespace std;
 
 //STRUCTS
@@ -152,6 +153,65 @@ void mostrarRecaudacion(PRODUCTOS vProd[], int tamProd,
              << "Stock remanente: " << remanente[i];
     }
 }
+
+FUNCIONES PUNTO 5 TOP 10 CLIENTES + SORTEO DE CUPONES:
+
+
+// Función para seleccionar 3 ganadores aleatorios de max10[] y mostrar su cantidad de compras
+//SE DESARROLLA ANTES QUE LAS DEMAS XQ SINO SALE ERROR QUE NO ESTÁ DECLARADA.
+void cargarAleatorio(int max10[], int maxClientes[], int tam) {
+    // Mostrar 3 números aleatorios del arreglo max10
+    for (int i = 0; i < 3; i++) {
+        int indice = rand() % tam;  // Generar un índice aleatorio entre 0 y tam-1
+        cout << "Ganador/a del cupon de descuento " << i + 1 << ": Cliente " << max10[indice] << " - Compras: " << maxClientes[indice] << endl;
+    }
+}
+
+// burbuja de mayor a menor usando una variable auxiliar
+void burbuja(int nroCliente[], int clientes[]) {
+    int auxCliente, auxCompras;
+    
+    for (int i = 0; i < 50 - 1; i++) {
+        for (int j = 0; j < 50 - i - 1; j++) {
+            if (clientes[j] < clientes[j + 1]) {
+                auxCompras = clientes[j];
+                clientes[j] = clientes[j + 1];
+                clientes[j + 1] = auxCompras;
+
+                // Intercambio de los números de cliente
+                auxCliente = nroCliente[j];
+                nroCliente[j] = nroCliente[j + 1];
+                nroCliente[j + 1] = auxCliente;
+            }
+        }
+    }
+}
+// los primeros 10 máximos de compras
+void max(int clientes[], int nroCliente[]) {
+    int max10[10];  //  10 clientes con más compras
+    int maxClientes[10];  //las compras de los 10 máximos
+    
+    for (int i = 0; i < 10; i++) {
+        max10[i] = nroCliente[i];       // nrocliente
+        maxClientes[i] = clientes[i];   // Guardamos la cantidad de compras del cliente
+    }
+
+    // un for que recorra los indices de max10 y maxClientes
+    cout << "TOP 10 clientes con más compras:" << endl;
+    for (int i = 0; i < 10; i++) {
+        cout << "Cliente " << max10[i] << " - Compras: " << maxClientes[i] << endl;
+    }
+    
+    // Llamar a la función de sorteo para elegir 3 ganadores
+    cargarAleatorio(max10, maxClientes, 10);  
+}
+
+
+
+
+
+
+
 //se pone & antes de solamente las variables ingresadas, NO de vectores, para que los valores se pasen por referencia 
 void ingresoVentas(int &nroCompra, int &codProd, string &FP, int &cant,
                    int &codCliente, int &dia,
@@ -187,7 +247,8 @@ void ingresoVentas(int &nroCompra, int &codProd, string &FP, int &cant,
 
         cout << "Ingrese el código de cliente: ";
         cin >> codCliente;
-
+        //PUNTO 5 TOP 10 SORTEO, EL VECTOR CLIENTES CUENTA LA CANT DE COMPRAS DE CADA CLIENTE,SUMA 1 XQ CADA CARGA ES UNA VENTA
+        clientes[codCliente - 1]++;
         cout << "Ingrese el día (1-30): ";
         cin >> dia;
     }
@@ -415,3 +476,22 @@ float recaudacion[20] = {0};
     float remanente[20] = {0};
     int cantVendida[20] = {0};
  mostrarRecaudacion(vProd, tamProd, recaudacion, cantVendida, remanente);
+
+//PUNTO 5 TOP 10 MAXIMO Y SORTEO:
+srand(time(0)); // Inicializamos el generador de números aleatorios
+    //IMPORTANTE: Para aletorio si o si incluimos arriba de todo como se incluye
+    //using namespacestd, de la misma forma ponemos #include <cstdlib>  // Para rand() y srand()
+//#include <ctime>    // Para time()
+
+int clientes[50] = {0};  // cantidad de compras de cada cliente
+int nroCliente[50];  //  códigos de cliente, es el codCliente que el usuario ingresa
+ // Inicializamos los nroCliente o sea codCliente de los clientes
+    for (int i = 0; i < 50; i++) {
+        nroCliente[i] = i + 1;  // Asignamos el código de cliente (1 a 50), se le suma 1 xq el vector arranca en cero
+    }
+//BURBUJA
+    burbuja(nroCliente, clientes);
+
+// MOSTRAR primeros 10 máximos
+max(clientes, nroCliente);
+FIN DEL PUNTO 5
